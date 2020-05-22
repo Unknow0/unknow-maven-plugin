@@ -2,6 +2,7 @@ package unknow.common.data;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Arrays;
 import java.util.Map.Entry;
 import java.util.Properties;
 
@@ -32,7 +33,8 @@ public class StoreBuilder extends AbstractMojo {
 			Properties p = new Properties();
 			for (int i = 0; i < f.length; i++) {
 				p.clear();
-				try (FileInputStream in = new FileInputStream(f[i])) {
+				getLog().info("loading property " + input.getDirectory()+"/"+f[i]);
+				try (FileInputStream in = new FileInputStream(new File(input.getDirectory(), f[i]))) {
 					p.load(in);
 				}
 				for (Entry e : p.entrySet())
